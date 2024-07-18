@@ -1,48 +1,27 @@
 import Table from "react-bootstrap/Table";
 
-function Rows({date, event, points, team}: {date: number, event: String, points: number, team: String}) {
-  let teamColour = "";
-  switch (team) {
-    case "DS":
-      teamColour = "red";
-      break;
-    case "DP":
-      teamColour = "blue";
-      break;
-    case "HL":
-      teamColour = "gold";
-      break;
-  }
+const teamColors: {[key: string]: string} = {
+  "DS": "red",
+  "DP": "blue",
+  "HL": "gold",
+}
 
-  function getDate(date: number): string {
-    let dateString: string = new Date(date).toLocaleDateString("en-us", {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    });
+function getTeamColor(val: string) {
+  return Object.keys(teamColors).find(key => teamColors[key] === val);
+}
 
-    if(dateString.match("Invalid Date")) {
-      return "In Progress..."
-    }
-
-    return(dateString);
-  }
-
-  // Date format
-  // https://www.freecodecamp.org/news/how-to-format-dates-in-javascript/
+function Rows({ date, event, points, team }: { date: string, event: string, points: string, team: string }) {
   return (
     <tr>
-      <td>
-        {getDate(date)}
-      </td>
+      <td>{date}</td>
       <td>{event}</td>
       <td style={{ color: "green" }}>+{points}</td>
-      <td style={{ color: teamColour }}>{team}</td>
+      <td style={{ color: getTeamColor(team) }}>{team}</td>
     </tr>
   );
 }
 
-export function Feed({activityLog}: {activityLog: Entry[]}) {
+export function Feed({ entries }: { entries: Entry[] }) {
   return (
     <div style={{ maxWidth: "1000px", width: "80%" }}>
       <Table striped hover>
@@ -55,11 +34,12 @@ export function Feed({activityLog}: {activityLog: Entry[]}) {
           </tr>
         </thead>
         <tbody>
-          {activityLog.map((e) => (
-            <Rows date={e.date}
-              event={e.event}
-              points={e.points}
-              team={e.team}
+          {entries.map(e => (
+            <Rows
+              date={e.Date}
+              event={e.Event}
+              points={e.Points}
+              team={e.Team}
             />
           ))}
         </tbody>

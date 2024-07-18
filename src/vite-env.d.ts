@@ -1,8 +1,8 @@
 /// <reference types="vite/client" />
-type Entry = {
-    date: number;
-    event: String;
-    points: number;
-    team: string;
-  };
+interface Entry {
+  Date: string;
+  Event: string;
+  Points: string;
+  Team: string;
+}
   
