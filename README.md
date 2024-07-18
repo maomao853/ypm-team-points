@@ -1,3 +1,26 @@
+# YPM Team Points
+
+Dependencies:
+* [Node.js](https://nodejs.org/en)
+
+Run the following commands to get started.
+
+```
+$ npm install
+$ npm run dev
+```
+
+Deploy to local server using the `deploy.sh` script. Make necessary changes before you deploy.
+
+```
+$ scp -i ~/.ssh/id_ed25519 -P <port> -r -v dist/* <user>@<hostname>:/var/www/<subdomain.domain.com>/
+```
+* `id_ed25519`: Replace with your ssh key
+* `port`: SSH port of your server
+* `user`: User of your server
+* `hostname`: Hostname or IP address of your server
+* `subdomain.domain.com`: Your fully qualified domain name (FQDN)
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
